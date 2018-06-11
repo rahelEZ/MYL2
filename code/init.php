@@ -5,8 +5,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 $servername = "localhost";
 $username = "root";
-$password = "root";
-$database = "MYL";
+$password = "";
+$database = "MYL2";
 // Create connection
 $con = new mysqli($servername, $username, $password, $database);
 $GLOBALS['conn'] = $con;

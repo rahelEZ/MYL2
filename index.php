@@ -24,7 +24,7 @@ include "code/header.php";
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <? include '_translate.php' ?>
+                <?php include "code/_translate.php"; ?>
             </div>
             <div class="col-md-4">
                 <form action="" method="post">

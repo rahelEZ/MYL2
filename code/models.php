@@ -198,6 +198,7 @@ class Language extends Model
 
     public function increment_words()
     {
+		
         $rank = LanguageGradeRule::get_grade_for_count($this->words_count + 1);
         $sql_string = "UPDATE {$this->TABLE} SET words_count = words_count + 1, rank='{$rank}' WHERE id = '{$this->id}'";
         $query = mysqli_query($this->connection(), $sql_string);

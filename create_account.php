@@ -17,7 +17,7 @@ if (!empty($_POST)) {
     } else {
         $user->new_user($full_name, $username, $email, $password);
         $user->login();
-        redirect("user.php");
+        redirect("home.php");
     }
 //    TODO: add is set valudation
 }

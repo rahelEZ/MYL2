@@ -14,7 +14,6 @@ if (!empty($_POST)) {
     } else if (!Word::validate_combination($word, $translation, $language)) {
         $err = "This word-translation combination already exists for this language";
     } else {
-
         $new_word->new_word($word, $translation, $language, $active_user);
     }
 }
@@ -69,7 +68,7 @@ include "code/header.php";
                     <ul class="list-group">
                         <li class="list-group-item"><strong>Created by:</strong> <?= $creator->full_name ?></li>
                         <li class="list-group-item"><strong>Words Count:</strong> <?= $language->words_count ?></li>
-                        <li class="list-group-item"><strong>Rank:</strong> <?= $creator->rank ?></li>
+                        <li class="list-group-item"><strong>Rank:</strong> <?= $language->rank ?></li>
                     </ul>
                     <div class="panel-footer">
 
