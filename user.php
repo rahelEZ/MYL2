@@ -258,6 +258,7 @@ include_once "code/header.php"
                 success: function(response){
                     window.alert(response);
 					window.location.reload(true);
+					redirect("user.php");
                 }
             });
 		}

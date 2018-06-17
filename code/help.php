@@ -17,7 +17,15 @@ if(isset($_POST['function'])){
      $word = $_POST["word"];
     $lang_id = $_POST["lang_id"];
     $result = mysqli_query($con, "DELETE FROM words WHERE word = \"".$word."\" AND language_id = \"".$lang_id."\";");
+	$decrease = mysqli_query($con, "UPDATE languages  SET words_count = words_count-1 WHERE id = \"".$lang_id."\";");
+
     }
+	
+	elseif($_POST['function'] == 'increment'){
+		$lang_id = $_POST["lang_id"];
+		$decrease = mysqli_query($con, "UPDATE languages  SET words_count = words_count+1 WHERE id = \"".$lang_id."\";");
+		
+	}
 	elseif($_POST['function'] == 'delete_lang'){
 		$lang_id = $_POST["lang_id"];
 		$result = mysqli_query($con, "DELETE FROM languages WHERE id = \"".$lang_id."\";");

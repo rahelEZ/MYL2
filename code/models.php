@@ -213,15 +213,16 @@ class Language extends Model
 
     public function increment_words()
     {
-		
         $rank = LanguageGradeRule::get_grade_for_count($this->words_count + 1);
         $sql_string = "UPDATE {$this->TABLE} SET words_count = words_count + 1, rank='{$rank}' WHERE id = '{$this->id}'";
+		$words_count=$words_count+1;
         $query = mysqli_query($this->connection(), $sql_string);
-
+		header("word.php");
+		
     }
     public function decrement_words()
     {
-        $rank = LanguageGradeRule::get_grade_for_count($this->words_count + 1);
+        $rank = LanguageGradeRule::get_grade_for_count($this->words_count - 1);
         $sql_string = "UPDATE {$this->TABLE} SET words_count = words_count - 1, rank='{$rank}' WHERE id = '{$this->id}'";
         $query = mysqli_query($this->connection(),$sql_string);
     }
@@ -302,6 +303,8 @@ class Word extends Model
 
     public function new_word($word, $translation, $language, $user)
     {
+		
+        $language->increment_words();
         $this->create([
             'word' => strtolower($word),
             'translation' => strtolower($translation),
@@ -309,7 +312,6 @@ class Word extends Model
             'user_id' => $user->id
         ]);
 
-        $language->increment_words();
     }
     
     public function delete_word($word, $translation, $language, $user)
