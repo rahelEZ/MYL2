@@ -37,7 +37,7 @@ if(isset($_POST['function'])){
         echo json_encode($pre_info); 
     }
 }
-else{	
+if(isset($_GET['function'])){
 	if($_GET['function'] == 'get_user_id'){
 		$username = $_GET["username"];
 		$result = mysqli_query($con, "SELECT * FROM users WHERE username = \"".$username."\";");

@@ -87,7 +87,22 @@ class Model
         $sql_string = "INSERT INTO $table ($key_list) VALUES ($value_list)";
         $query = mysqli_query($this->connection(), $sql_string);
     }
-
+    public function delete($value_pair)
+    {
+        $table = $this->TABLE;
+        $key_list = implode(",", array_keys($value_pair));
+        $value_list = "'" . implode("','", array_values($value_pair)) . "'";
+        $sql_string = "DELETE FROM $table ($key_list) VALUES ($value_list)";
+        $query = mysqli_query($this->connection(), $sql_string);
+    }
+    public function update($word,$translation,$word_edit,$translation_edit,$language,$user)
+    {
+        $table = $this->TABLE;
+        $key_list = implode(",", array_keys($value_pair));
+        $value_list = "'" . implode("','", array_values($value_pair)) . "'";
+        $sql_string = "UPDATE $table SET word = $word_edit, translation = $translation_edit  WHERE language_id = $language AND user_id = $user AND word = $word ";
+        $query = mysqli_query($this->connection(), $sql_string);
+    }
     public function value_with_key_exists($field, $value)
     {
 
@@ -204,6 +219,12 @@ class Language extends Model
         $query = mysqli_query($this->connection(), $sql_string);
 
     }
+    public function decrement_words()
+    {
+        $rank = LanguageGradeRule::get_grade_for_count($this->words_count + 1);
+        $sql_string = "UPDATE {$this->TABLE} SET words_count = words_count - 1, rank='{$rank}' WHERE id = '{$this->id}'";
+        $query = mysqli_query($this->connection(),$sql_string);
+    }
 
 }
 
@@ -289,6 +310,28 @@ class Word extends Model
         ]);
 
         $language->increment_words();
+    }
+    
+    public function delete_word($word, $translation, $language, $user)
+    {
+        $this->delete([
+            'word' => strtolower($word),
+            'translation' => strtolower($translation),
+            'language_id' => $language->id,
+            'user_id' => $user->id
+        ]);
+        $language->decrement_words();
+    }
+    public function update_word($word,$translation,$word_edit, $translation_edit,$language,$user)
+    {
+        $this->update([
+            'word' => strtolower($word),
+            'translation' => strtolower($translation),
+            'word_edit' => strtolower($word_edit),
+            'translation_edit' => strtolower($translation_edit),
+            'language_id' => $language->id,
+            'user_id' => $user->id
+        ]);
     }
 
     public static function get_all_for_language($language)
