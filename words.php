@@ -101,9 +101,16 @@ include "code/header.php";
                         <?= $word->user_id == $language->user_id ? "High" : "Low" ?>
                     </td>
                     <td> 
-
+					<?php
+                                if ($language->user_id == $active_user->id) {
+                                    ?>
+						<span class="pull-right">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id = "<?php echo $word->word; echo "-".$lang_id; ?>" onclick = "showDetails(this)">Edit</button> 
-                        <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#deleteModal" id = "<?php echo $word->word; echo "-".$lang_id; ?>"  onclick = "addWord(this)">Delete</button> 
+                        <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#deleteModal" id = "<?php echo $word->word; echo "-".$lang_id; ?>"  onclick = "addWord(this)">Delete</button>
+						</span>
+						      <?php
+                                }
+                                ?>
                     </td>
                 </tr>
                 <?php

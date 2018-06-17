@@ -60,7 +60,7 @@ if(isset($_GET['function'])){
         echo json_encode($pre_info); 
 		
 	}
-	else{
+	if($_GET['function'] == 'get'){
         $word = $_GET["word"];
         $lang_id = $_GET["lang_id"];
         $result = mysqli_query($con, "SELECT * FROM words WHERE word = \"".$word."\" AND language_id = \"".$lang_id."\";");
