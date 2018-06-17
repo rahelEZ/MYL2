@@ -14,7 +14,10 @@ Email : rahel.zewde@stonybrook.edu
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/bootstrap.css">
-
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
     <title>
         MYL
     </title>
@@ -30,6 +33,7 @@ Email : rahel.zewde@stonybrook.edu
         body {
             padding-top: 60px;
         }
+        
     </style>
 
 </head>
