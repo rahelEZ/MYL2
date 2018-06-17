@@ -363,7 +363,7 @@ class Word extends Model
         $translated_list = [];
         while ($row = $query->fetch_array()) {
 
-            $translated_list[$row['translation']] = $row['word'];
+            $translated_list[$row['translation']] = $row['translation'];
         }
         $text = "";
         foreach ($words_to_translate as $word) {
