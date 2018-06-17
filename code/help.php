@@ -53,6 +53,13 @@ if(isset($_GET['function'])){
         echo json_encode($pre_info); 
 		
 	}
+		if($_GET['function'] == 'get_word_count'){
+		$lang_id = $_GET["lang_id"];
+		$result = mysqli_query($con, "SELECT * FROM languages WHERE id = \"".$lang_id."\";");
+		$pre_info = mysqli_fetch_object($result);
+        echo json_encode($pre_info); 
+		
+	}
 	else{
         $word = $_GET["word"];
         $lang_id = $_GET["lang_id"];

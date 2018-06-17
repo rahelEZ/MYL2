@@ -423,3 +423,4 @@ class LanguageGradeRule extends Model
     }
 
 }
+?>

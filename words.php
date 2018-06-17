@@ -15,7 +15,6 @@ if (!empty($_POST)) {
     } else if (!Word::validate_combination($word, $translation, $language)) {
         $err = "This word-translation combination already exists for this language";
     } else {
-	
         $new_word->new_word($word, $translation, $language, $active_user);
 		
     }
@@ -47,7 +46,7 @@ include "code/header.php";
                             <input type="text" id="lang_name" class="form-control" name="translation"/>
                         </div>
                         <div class="form-group">
-                            <button name="submit" method="POST" type="submit" class="btn btn-primary" id="add">Submit
+                            <button name="submit" method="POST" type="submit" class="btn btn-primary" id="add" >Submit
                             </button>
                         </div>
                         <br/>
@@ -259,6 +258,7 @@ include "code/header.php";
                 method: "POST",
                 data: {"function":"edit", "lang_id":lang_id, "pre_word":word, "word":new_word,"translation":new_translation},
                 success: function(response){
+					window.location.reload();
 					redirect("words.php");
                 }
             });
@@ -277,7 +277,6 @@ include "code/header.php";
 					redirect("words.php");
                 }
             });
-			window.alert("Delete completed");
         }
 		function addWord(button){
 			var  array = button.id.split("-");
@@ -296,8 +295,9 @@ include "code/header.php";
             });
 		}
 		function refresh(){
-			window.alert("it is here");
+			window.alert("i am her");
 			redirect("words.php");
+			window.location.reload();
 		}
     </script>
     <?php
