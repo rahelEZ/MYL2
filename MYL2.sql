@@ -19,11 +19,7 @@ CREATE TABLE `contributors` (
   `type` varchar(10) NOT NULL
 ) ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `languages`
---
 
 CREATE TABLE `languages` (
   `id` int(11) NOT NULL,
@@ -56,21 +52,12 @@ INSERT INTO `language_grade_rules` (`id`, `words_count`, `grade`) VALUES
 (12, 0, 'F');
 
 
-
-CREATE TABLE `logs` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `timestamp` bigint(20) NOT NULL,
-  `text` int(11) NOT NULL
-) ;
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `rank` int(11) NOT NULL
+  `email` varchar(255) NOT NULL
 ) ;
 
 
@@ -94,10 +81,6 @@ ALTER TABLE `languages`
 
 ALTER TABLE `language_grade_rules`
   ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `logs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `language_id` (`language_id`);
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -130,10 +113,6 @@ ALTER TABLE `contributors`
 
 ALTER TABLE `languages`
   ADD CONSTRAINT `languages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
-
-ALTER TABLE `logs`
-  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `words`
   ADD CONSTRAINT `words_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
