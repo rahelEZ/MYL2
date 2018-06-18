@@ -4,6 +4,7 @@ $lang_id = floor($_GET['lang_id']);
 $language = new Language($lang_id);
 $creator = new User($language->user_id);
 $can_edit = Contributor::can_user_add_word($active_user, $language);
+header("words.php");
 if (!empty($_POST)) {
     $validation_message = require_fields(["word" => "Word", "translation" => "Translation"], $_POST);
     $word = $_POST['word'];
@@ -130,7 +131,7 @@ if ($language->user_id == $active_user->id) {
                             <h4 class="modal-title">Word Editor</h4>
                         </div>
                         <div class="modal-body">
-                            <form method="post" class="formController" name = "edit" >
+                            <form  class="formController" name = "edit" >
                                 <div class="form-group">
                                     <label id="nameLabel">Word: </label>
                                     <input type="text" id="word_edit" class="form-control" name="word_edit"/>
@@ -139,9 +140,6 @@ if ($language->user_id == $active_user->id) {
                                     <label id="nameLabel">Translation: </label>
                                     <input type="text" id="translation_edit" class="form-control" name="translation_edit"/>
                                 </div>
-                                <input type = "text" id = "pre_word" name = "pre_word" style = "display:none;">
-                                <input type = "text" id = "pre_word" name = "pre_translation" style = "display:none;">
-
                                 <br/>
                          
                                 <div class="modal-footer">
@@ -165,42 +163,6 @@ if ($language->user_id == $active_user->id) {
                 </div>
             </div>
 
-            <!------------------ Pop up file ---------------------->
-
-            <div id="deleteModel" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Word Editor</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" class="formController" name = "edit" >
-                                <div class="form-group">
-                                    <label id="nameLabel">Word: </label>
-                                    <span></span>
-                                </div>
-                                <div class="form-group">
-                                    <label id="nameLabel">Translation: </label>
-                                    <span></span>
-                                </div>
-
-                                <br/>
-                  
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button name="delete"  type="button" class="btn btn-primary" id="delete">Delete
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-			
 			<!------------------------- delete word ---------------------------->
 					          <div id="deleteModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -265,7 +227,7 @@ if ($language->user_id == $active_user->id) {
                 method: "POST",
                 data: {"function":"edit", "lang_id":lang_id, "pre_word":word, "word":new_word,"translation":new_translation},
                 success: function(response){
-					window.location.reload();
+					window.location.reload(true);
 					redirect("words.php");
                 }
             });
@@ -277,7 +239,7 @@ if ($language->user_id == $active_user->id) {
                 method: "POST",
                 data: {"function":"delete", "word": word, "lang_id": lang_id},
                 success: function(response){ 
-				window.location.reload();
+				
 					redirect("words.php");
                 }
             });
