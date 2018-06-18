@@ -4,7 +4,6 @@ $lang_id = floor($_GET['lang_id']);
 $language = new Language($lang_id);
 $creator = new User($language->user_id);
 $can_edit = Contributor::can_user_add_word($active_user, $language);
-header("words.php");
 if (!empty($_POST)) {
     $validation_message = require_fields(["word" => "Word", "translation" => "Translation"], $_POST);
     $word = $_POST['word'];
@@ -15,6 +14,7 @@ if (!empty($_POST)) {
     } else if (!Word::validate_combination($word, $translation, $language)) {
         $err = "This word-translation combination already exists for this language";
     } else {
+	
         $new_word->new_word($word, $translation, $language, $active_user);
 		
     }
@@ -46,7 +46,7 @@ include "code/header.php";
                             <input type="text" id="lang_name" class="form-control" name="translation"/>
                         </div>
                         <div class="form-group">
-                            <button name="submit" method="POST" type="submit" class="btn btn-primary" id="add" >Submit
+                            <button name="submit" method="POST" type="submit" class="btn btn-primary" id="add">Submit
                             </button>
                         </div>
                         <br/>
@@ -102,7 +102,7 @@ include "code/header.php";
                     </td>
                     <td> 
 					<?php
-                                if ($language->user_id == $active_user->id) {
+if ($language->user_id == $active_user->id) {
                                     ?>
 						<span class="pull-right">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id = "<?php echo $word->word; echo "-".$lang_id; ?>" onclick = "showDetails(this)">Edit</button> 
@@ -272,15 +272,12 @@ include "code/header.php";
         }
 
         function deleteWord(){
-           // var  array = button.id.split("-");
-           // word = array[0];
-           // lang_id = array[1]; 
-
             $.ajax({
                 url: "code/help.php",
                 method: "POST",
                 data: {"function":"delete", "word": word, "lang_id": lang_id},
                 success: function(response){ 
+				window.location.reload();
 					redirect("words.php");
                 }
             });
@@ -302,9 +299,8 @@ include "code/header.php";
             });
 		}
 		function refresh(){
-			window.alert("i am her");
+			window.alert("it is here");
 			redirect("words.php");
-			window.location.reload();
 		}
     </script>
     <?php

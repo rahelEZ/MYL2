@@ -55,7 +55,6 @@ include_once "code/header.php"
                                     <label id="nameLabel">Add Contributor: </label>
                                     <input type="text"  class="form-control" name="word_edit" id = "contributer"/>
                                     <select class="form-control" id = "type">
-                                        <option value="owner">Owner</option>
                                         <option value="contributor">Contributor</option>
                                     </select>
                                 </div>
@@ -231,9 +230,6 @@ include_once "code/header.php"
                 method: "GET",
                 data: {"function":"get_user_id", "username": contributerId},
                 success: function(response){
-					window.alert(contributerId);
-                    window.alert(response);
-							
 						var reply = JSON.parse(response);
 						
 						if(!reply){
@@ -241,7 +237,6 @@ include_once "code/header.php"
 						}
 						else{
 							user_id =reply.id;
-							window.alert(user_id);
 							addNewCon();
 						}
 						
@@ -256,7 +251,6 @@ include_once "code/header.php"
                 method: "POST",
                 data: {"function":"delete_lang","lang_id": name},
                 success: function(response){
-                    window.alert(response);
 					window.location.reload(true);
 					redirect("user.php");
                 }
@@ -269,6 +263,7 @@ include_once "code/header.php"
                 data: {"function":"addContributer", "user_id": user_id, "type": type, "language_id": lang_id},
                 success: function(response){
 					window.location.reload(true);
+					redirect("user.php");
                 }
             });
 			
@@ -283,6 +278,7 @@ include_once "code/header.php"
                 data: {"function":"change_lang_name","lang_id": name, "new_name":new_name},
                 success: function(response){
 					window.location.reload(true);
+					redirect("user.php");
                 }
 				
             });
